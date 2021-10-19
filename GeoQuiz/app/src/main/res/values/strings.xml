@@ -6,8 +6,11 @@
     <string name="question_africa">나일강은 이집트에는 시작된다.</string>
     <string name="question_americas">아마존강은 아메리카 대륙에서 가장 긴 강이다.</string>
     <string name="question_asia">바이칼 호수는 세계에서 가장 오래되고 가장 깊은 담수호다.</string>
+    <string name="warn_first_question">첫번째 문제입니다.</string>
+    <string name="info_correct_answers">총 %1$d 문제 중 %2$d 정답, 정답률 (%3$.2f\%%).</string>
     <string name="true_button">True</string>
     <string name="false_button">False</string>
+    <string name="prev_button">Previous</string>
     <string name="next_button">Next</string>
     <string name="correct_toast">정답!</string>
     <string name="incorrect_toast">오답!</string>
