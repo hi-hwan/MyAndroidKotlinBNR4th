@@ -2,10 +2,8 @@ package com.hihwan.practice.geoquiz
 
 import androidx.lifecycle.ViewModel
 
-private const val TAG: String = "QuizViewModel"
-
 class QuizViewModel : ViewModel() {
-    public var currentIndex = 0;
+    var currentIndex = 0
 
     private val questionBank = listOf(
         Question(R.string.question_australia, true),

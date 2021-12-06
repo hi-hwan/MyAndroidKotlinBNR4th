@@ -1,5 +1,6 @@
 package com.hihwan.practice.geoquiz
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var falseButton: Button
     private lateinit var nextButton: ImageButton
     private lateinit var prevButton: ImageButton
+    private lateinit var cheatButton: ImageButton
     private lateinit var questionTextView: TextView
 
     private val quizViewModel: QuizViewModel by lazy {
@@ -29,11 +31,12 @@ class MainActivity : AppCompatActivity() {
 
         val currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
 
-        trueButton = findViewById(R.id.true_button);
-        falseButton = findViewById(R.id.false_button);
-        nextButton = findViewById(R.id.next_button);
-        prevButton = findViewById(R.id.prev_button);
-        questionTextView = findViewById(R.id.question_text_view);
+        trueButton = findViewById(R.id.true_button)
+        falseButton = findViewById(R.id.false_button)
+        nextButton = findViewById(R.id.next_button)
+        prevButton = findViewById(R.id.prev_button)
+        cheatButton = findViewById(R.id.cheat_button)
+        questionTextView = findViewById(R.id.question_text_view)
 
         trueButton.setOnClickListener {
             checkAnswer(true)
@@ -54,6 +57,11 @@ class MainActivity : AppCompatActivity() {
         prevButton.setOnClickListener {
             quizViewModel.moveToPrev()
             updateQuestion()
+        }
+
+        cheatButton.setOnClickListener {
+            val intent = Intent(this, CheatActivity::class.java)
+            startActivity(intent)
         }
 
         questionTextView.setOnClickListener {
