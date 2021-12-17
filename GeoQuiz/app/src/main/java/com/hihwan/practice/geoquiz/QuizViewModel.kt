@@ -34,6 +34,10 @@ class QuizViewModel : ViewModel() {
     val isLastAnswer: Boolean
         get() = (currentIndex == questionBank.size - 1)
 
+    var isCheater: Boolean
+        get() = questionBank[currentIndex].isCheater
+        set(value) {questionBank[currentIndex].isCheater = value}
+
     fun getTotalScore(): Int {
         var score = 0
         for (q in questionBank) {
