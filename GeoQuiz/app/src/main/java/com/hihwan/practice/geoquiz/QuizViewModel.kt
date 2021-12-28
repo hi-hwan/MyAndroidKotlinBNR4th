@@ -2,8 +2,11 @@ package com.hihwan.practice.geoquiz
 
 import androidx.lifecycle.ViewModel
 
+private const val MAX_CHEAT_COUNT = 3
+
 class QuizViewModel : ViewModel() {
     var currentIndex = 0
+    var cheatCount = MAX_CHEAT_COUNT
 
     private val questionBank = listOf(
         Question(R.string.question_australia, true),
@@ -36,7 +39,13 @@ class QuizViewModel : ViewModel() {
 
     var isCheater: Boolean
         get() = questionBank[currentIndex].isCheater
-        set(value) {questionBank[currentIndex].isCheater = value}
+        set(value) {
+            questionBank[currentIndex].isCheater = value
+            if (value) cheatCount--
+        }
+
+    val isEnabledCheating: Boolean
+        get() = cheatCount > 0
 
     fun getTotalScore(): Int {
         var score = 0

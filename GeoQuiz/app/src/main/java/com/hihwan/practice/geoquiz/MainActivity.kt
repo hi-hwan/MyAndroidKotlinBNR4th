@@ -1,7 +1,9 @@
 package com.hihwan.practice.geoquiz
 
 import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -62,9 +64,14 @@ class MainActivity : AppCompatActivity() {
             updateQuestion()
         }
 
-        cheatButton.setOnClickListener {
+        cheatButton.setOnClickListener { view ->
             val intent = CheatActivity.newIntent(this, quizViewModel.currentQuestionAnswer)
-            startActivityForResult(intent, REQUEST_CODE_CHEAT)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val options = ActivityOptions.makeClipRevealAnimation(view, 0, 0, view.width, view.height)
+                startActivityForResult(intent, REQUEST_CODE_CHEAT, options.toBundle())
+            } else {
+                startActivityForResult(intent, REQUEST_CODE_CHEAT)
+            }
         }
 
         questionTextView.setOnClickListener {
@@ -85,6 +92,7 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == REQUEST_CODE_CHEAT) {
             quizViewModel.isCheater =
                 data?.getBooleanExtra(EXTRA_ANSWER_SHOWN, false) ?: false
+            updateQuestion()
         }
     }
 
@@ -127,10 +135,13 @@ class MainActivity : AppCompatActivity() {
         val isAnswered = quizViewModel.currentQuestionIsAnswered
         if (isAnswered) {
             trueButton.isEnabled = false
-            falseButton.isEnabled = false
         } else {
+            falseButton.isEnabled = false
             trueButton.isEnabled = true
             falseButton.isEnabled = true
+        }
+        if (!quizViewModel.isEnabledCheating) {
+            cheatButton.isEnabled = false
         }
     }
 

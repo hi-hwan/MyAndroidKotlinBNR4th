@@ -3,6 +3,7 @@ package com.hihwan.practice.geoquiz
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -14,6 +15,7 @@ private const val EXTRA_ANSWER_IS_TRUE = "com.hihwan.practice.geoquiz.answer_is_
 class CheatActivity : AppCompatActivity() {
     private lateinit var answerTextView: TextView
     private lateinit var showAnswerButton: Button
+    private lateinit var apiLevelTextView: TextView
 
     private var answerIsTrue = false
 
@@ -33,6 +35,12 @@ class CheatActivity : AppCompatActivity() {
             answerTextView.setText(answerText)
             setAnswerShownResult(true)
         }
+        val apiLevel = String.format(
+            resources.getString(R.string.api_level_text),
+            Build.VERSION.SDK_INT
+        )
+        apiLevelTextView = findViewById(R.id.api_level_text_view)
+        apiLevelTextView.text = apiLevel
     }
 
     private fun setAnswerShownResult(isAnswerResult: Boolean) {
