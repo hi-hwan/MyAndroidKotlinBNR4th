@@ -133,16 +133,10 @@ class MainActivity : AppCompatActivity() {
         questionTextView.setText(questionTextResId)
 
         val isAnswered = quizViewModel.currentQuestionIsAnswered
-        if (isAnswered) {
-            trueButton.isEnabled = false
-        } else {
-            falseButton.isEnabled = false
-            trueButton.isEnabled = true
-            falseButton.isEnabled = true
-        }
-        if (!quizViewModel.isEnabledCheating) {
-            cheatButton.isEnabled = false
-        }
+        trueButton.isEnabled = !isAnswered
+        falseButton.isEnabled = !isAnswered
+
+        cheatButton.isEnabled = !quizViewModel.isEnabledCheating
     }
 
     private fun checkAnswer(userAnswer: Boolean) {
