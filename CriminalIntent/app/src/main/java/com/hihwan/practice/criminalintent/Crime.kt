@@ -1,12 +1,14 @@
 package com.hihwan.practice.criminalintent
 
-import android.text.format.DateFormat
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.*
 
+@Entity
 data class Crime(
-    val id: UUID = UUID.randomUUID(),
+    @PrimaryKey var id: UUID = UUID.randomUUID(),
     var title: String = "",
-    var date: CharSequence = DateFormat.format("EEEE, MMM d, yyyy", Date()),
+    var date: Date = Date(),
     var isSolved: Boolean = false,
-    var requiresPolice: Boolean = false
+    ///* Challenge */ var requiresPolice: Boolean = false
 )
